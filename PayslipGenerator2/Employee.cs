@@ -2,19 +2,19 @@
 {
     public struct Employee
     {
-        private string _firstName;
-        private string _lastName;
-        private int _annualSalary;
-        private int _superRate;
-        private string _paymentStartDate;
+        public string FirstName { get; }
+        public string LastName { get; }
+        public int AnnualSalary { get; }
+        public double SuperRate { get; }
+        public string PaymentStartDate { get; }
 
-        public Employee(string firstName, string lastName, int annualSalary, int superRate, string paymentStartDate)
+        public Employee(string firstName, string lastName, int annualSalary, double superRate, string paymentStartDate)
         {
-            _firstName = firstName;
-            _lastName = lastName;
-            _annualSalary = annualSalary;
-            _superRate = superRate;
-            _paymentStartDate = paymentStartDate;
+            FirstName = firstName;
+            LastName = lastName;
+            AnnualSalary = annualSalary;
+            SuperRate = superRate;
+            PaymentStartDate = paymentStartDate;
         }
     }
 }
