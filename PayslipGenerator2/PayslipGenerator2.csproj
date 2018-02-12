@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeDetailsParser.cs" />
+    <Compile Include="Payslip.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PayslipGenerator.cs" />
