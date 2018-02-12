@@ -2,21 +2,21 @@
 {
     public struct Payslip
     {
-        private string _name;
-        private string _payPeriod;
-        private int _grossIncome;
-        private int _incomeTax;
-        private int _netIncome;
-        private int _super;
+        public string Name { get; }
+        public string PayPeriod { get; }
+        public int GrossIncome { get; }
+        public int IncomeTax { get; }
+        public int NetIncome { get; }
+        public int Super { get; }
 
         public Payslip(string name, string payPeriod, int grossIncome, int incomeTax, int netIncome, int super)
         {
-            _name = name;
-            _payPeriod = payPeriod;
-            _grossIncome = grossIncome;
-            _incomeTax = incomeTax;
-            _netIncome = netIncome;
-            _super = super;
+            Name = name;
+            PayPeriod = payPeriod;
+            GrossIncome = grossIncome;
+            IncomeTax = incomeTax;
+            NetIncome = netIncome;
+            Super = super;
         }
     }
 }

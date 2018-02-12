@@ -8,8 +8,9 @@ namespace PayslipGenerator2
         {
             var parser = new EmployeeDetailsParser();
             var employee = parser.CsvParse(employeeDetails);
+            var payslip = MakePayslip(employee);
 
-            return "David Rudd,01 March – 31 March,5004,922,4082,450";
+            return FormatPayslip(payslip);
         }
 
         public Payslip MakePayslip(Employee employee)
@@ -50,6 +51,12 @@ namespace PayslipGenerator2
                             (annualSalary - 180000) * .45;
             }
             return incomeTax;
+        }
+
+        public string FormatPayslip(Payslip payslip)
+        {
+            return
+                $"{payslip.Name},{payslip.PayPeriod},{payslip.GrossIncome},{payslip.IncomeTax},{payslip.NetIncome},{payslip.Super}";
         }
     }
 }
