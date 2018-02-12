@@ -1,5 +1,4 @@
-﻿using System.Runtime.Remoting.Messaging;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace PayslipGenerator2.Tests
 {
@@ -15,6 +14,5 @@ namespace PayslipGenerator2.Tests
 
             Assert.AreEqual(expectedPayslip, generator.Process(employeeDetails));
         }
-
     }
 }

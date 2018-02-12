@@ -13,7 +13,7 @@ namespace PayslipGenerator2.Tests
 
             var expectedEmployee = new Employee("David", "Rudd", 60050, .09, "01 March – 31 March");
 
-            Assert.AreEqual(expectedEmployee, parser.CsvParse(employeeDetails));
+            Assert.AreEqual(expectedEmployee, parser.Parse(employeeDetails));
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace PayslipGenerator2.Tests
 
             var expectedEmployee = new Employee("Ryan", "Chen", 120000, .1, "01 March – 31 March");
 
-            Assert.AreEqual(expectedEmployee, parser.CsvParse(employeeDetails));
+            Assert.AreEqual(expectedEmployee, parser.Parse(employeeDetails));
         }
     }
 }

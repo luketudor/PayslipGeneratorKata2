@@ -4,44 +4,36 @@ namespace PayslipGenerator2
 {
     public class Calculator
     {
+        private readonly int _payslipsPerYear;
+        private readonly TaxTable _taxTable;
+
+        public Calculator()
+        {
+            _taxTable = new TaxTable(null);
+            _payslipsPerYear = 12;
+        }
+
         public Payslip MakePayslip(Employee employee)
         {
+            int Round(double number)
+            {
+                return Convert.ToInt32(Math.Round(number));
+            }
+
             var name = $"{employee.FirstName} {employee.LastName}";
             var payPeriod = employee.PaymentStartDate;
-            var grossIncome = employee.AnnualSalary / 12;
-            var incomeTax = AnnualIncomeTax(employee.AnnualSalary) / 12;
+            var grossIncome = employee.AnnualSalary / _payslipsPerYear;
+            var incomeTax = _taxTable.AnnualIncomeTax(employee.AnnualSalary) / _payslipsPerYear;
             var netIncome = grossIncome - incomeTax;
             var super = grossIncome * employee.SuperRate;
 
-            return new Payslip(name, payPeriod, grossIncome, (int) Math.Round(incomeTax), (int) Math.Round(netIncome),
-                (int) Math.Round(super));
-        }
-
-        public double AnnualIncomeTax(double annualSalary)
-        {
-            double incomeTax;
-            if (annualSalary <= 18200)
-            {
-                incomeTax = 0;
-            }
-            else if (annualSalary <= 37000)
-            {
-                incomeTax = (annualSalary - 18200) * .19;
-            }
-            else if (annualSalary <= 80000)
-            {
-                incomeTax = (37000 - 18200) * .19 + (annualSalary - 37000) * .325;
-            }
-            else if (annualSalary <= 180000)
-            {
-                incomeTax = (37000 - 18200) * .19 + (80000 - 37000) * .325 + (annualSalary - 80000) * .37;
-            }
-            else
-            {
-                incomeTax = (37000 - 18200) * .19 + (80000 - 37000) * .325 * (180000 - 80000) * .37 +
-                            (annualSalary - 180000) * .45;
-            }
-            return incomeTax;
+            return new Payslip(
+                name,
+                payPeriod,
+                grossIncome,
+                Round(incomeTax),
+                Round(netIncome),
+                Round(super));
         }
     }
 }

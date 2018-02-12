@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PayslipGenerator2
+﻿namespace PayslipGenerator2
 {
     public class PayslipGenerator
     {
@@ -12,6 +10,5 @@ namespace PayslipGenerator2
 
             return new Formatter().FormatPayslip(payslip);
         }
-
     }
 }

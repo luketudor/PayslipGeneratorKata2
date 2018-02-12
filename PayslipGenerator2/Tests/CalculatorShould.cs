@@ -26,16 +26,5 @@ namespace PayslipGenerator2.Tests
 
             Assert.AreEqual(expectedPayslip, actualPayslip);
         }
-
-        [TestCase(0, 0)]
-        [TestCase(60050, 11063.25)]
-        [Test]
-        public void CalculateAnnualIncomeTax(double annualSalary, double expectedTax)
-        {
-            var actualTax = new Calculator().AnnualIncomeTax(annualSalary);
-
-            Assert.AreEqual(expectedTax, actualTax);
-        }
-
     }
 }
