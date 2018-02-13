@@ -9,7 +9,15 @@ namespace PayslipGenerator2
 
         public Calculator()
         {
-            _taxTable = new TaxTable(null);
+            _taxTable = new TaxTable(new[]
+                {
+                    new TaxBracket(18200, 0, 0),
+                    new TaxBracket(37000, .19, 0),
+                    new TaxBracket(80000, .325, 3572),
+                    new TaxBracket(180000, .37, 17547),
+                    new TaxBracket(int.MaxValue, .45, 54547)
+                }
+            );
             _payslipsPerYear = 12;
         }
 

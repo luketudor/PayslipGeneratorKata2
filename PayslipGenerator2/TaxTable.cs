@@ -2,29 +2,26 @@
 {
     public class TaxTable
     {
+        private readonly TaxBracket[] _taxBrackets;
+
+        public TaxTable(TaxBracket[] taxBrackets)
+        {
+            _taxBrackets = taxBrackets;
+        }
+
         public double AnnualIncomeTax(double annualSalary)
         {
-            double incomeTax;
-            if (annualSalary <= 18200)
+            var incomeTax = 0.0;
+            for (var i = 0; i < _taxBrackets.Length; i++)
             {
-                incomeTax = 0;
-            }
-            else if (annualSalary <= 37000)
-            {
-                incomeTax = (annualSalary - 18200) * .19;
-            }
-            else if (annualSalary <= 80000)
-            {
-                incomeTax = (37000 - 18200) * .19 + (annualSalary - 37000) * .325;
-            }
-            else if (annualSalary <= 180000)
-            {
-                incomeTax = (37000 - 18200) * .19 + (80000 - 37000) * .325 + (annualSalary - 80000) * .37;
-            }
-            else
-            {
-                incomeTax = (37000 - 18200) * .19 + (80000 - 37000) * .325 * (180000 - 80000) * .37 +
-                            (annualSalary - 180000) * .45;
+                var lowerBound = i > 0 ? _taxBrackets[i - 1].CutOff : 0;
+                var upperBound = _taxBrackets[i].CutOff;
+
+                if (annualSalary <= upperBound)
+                {
+                    incomeTax = (annualSalary - lowerBound) * _taxBrackets[i].Rate + _taxBrackets[i].LumpTax;
+                    break;
+                }
             }
             return incomeTax;
         }

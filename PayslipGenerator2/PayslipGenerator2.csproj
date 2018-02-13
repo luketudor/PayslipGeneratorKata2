@@ -49,6 +49,7 @@
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeDetailsParser.cs" />
     <Compile Include="Formatter.cs" />
+    <Compile Include="TaxBracket.cs" />
     <Compile Include="Tests\FormatterShould.cs" />
     <Compile Include="Payslip.cs" />
     <Compile Include="Program.cs" />
