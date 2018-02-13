@@ -2,15 +2,17 @@
 {
     public struct TaxBracket
     {
-        public int CutOff { get; }
+        public int LowerBound { get; }
+        public int UpperBound { get; }
         public double Rate { get; }
         public int LumpTax { get; }
 
-        public TaxBracket(int cutOff, double rate, int lumpTax)
+        public TaxBracket(int lowerBound, int upperBound, double rate, int lumpTax)
         {
-            CutOff = cutOff;
+            UpperBound = upperBound;
             Rate = rate;
             LumpTax = lumpTax;
+            LowerBound = lowerBound;
         }
     }
 }

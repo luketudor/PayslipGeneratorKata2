@@ -18,11 +18,11 @@ namespace PayslipGenerator2.Tests
         {
             var table = new TaxTable(new[]
                 {
-                    new TaxBracket(18200, 0, 0),
-                    new TaxBracket(37000, .19, 0),
-                    new TaxBracket(80000, .325, 3572),
-                    new TaxBracket(180000, .37, 17547),
-                    new TaxBracket(int.MaxValue, .45, 54547) 
+                    new TaxBracket(0, 18200, 0, 0),
+                    new TaxBracket(18200, 37000, .19, 0),
+                    new TaxBracket(37000, 80000, .325, 3572),
+                    new TaxBracket(80000, 180000, .37, 17547),
+                    new TaxBracket(180000, int.MaxValue, .45, 54547) 
                 }
             );
             var actualTax = table.AnnualIncomeTax(annualSalary);
@@ -35,15 +35,15 @@ namespace PayslipGenerator2.Tests
         {
             var table = new TaxTable(new[]
                 {
-                    new TaxBracket(18200, 0, 0),
-                    new TaxBracket(37000, .19, 0),
-                    new TaxBracket(80000, .325, 3572),
-                    new TaxBracket(180000, .37, 17547)
+                    new TaxBracket(0, 18200, 0, 0),
+                    new TaxBracket(18200, 37000, .19, 0),
+                    new TaxBracket(37000, 80000, .325, 3572),
+                    new TaxBracket(80000, 180000, .37, 17547)
                 }
             );
             const int annualSalary = 200000;
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => table.AnnualIncomeTax(annualSalary));
+            Assert.Catch<Exception>(() => table.AnnualIncomeTax(annualSalary));
         }
     }
 }
