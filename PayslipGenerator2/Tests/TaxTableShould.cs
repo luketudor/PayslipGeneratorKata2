@@ -8,8 +8,11 @@ namespace PayslipGenerator2.Tests
     public class TaxTableShould
     {
         [TestCase(0, 0)]
+        [TestCase(18200, 0)]
         [TestCase(19000, 152)]
         [TestCase(60050, 11063.25)]
+        [TestCase(100000, 24947)]
+        [TestCase(200000, 63547)]
         [Test]
         public void CalculateAnnualIncomeTax(double annualSalary, double expectedTax)
         {
