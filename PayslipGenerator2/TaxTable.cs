@@ -1,31 +1,31 @@
-﻿using PayslipGenerator2.Structures;
+﻿using System;
+using System.Collections.Generic;
+using PayslipGenerator2.Structures;
 
 namespace PayslipGenerator2
 {
     public class TaxTable
     {
-        private readonly TaxBracket[] _taxBrackets;
+        private readonly IReadOnlyList<TaxBracket> _taxBrackets;
 
-        public TaxTable(TaxBracket[] taxBrackets)
+        public TaxTable(IReadOnlyList<TaxBracket> taxBrackets)
         {
             _taxBrackets = taxBrackets;
         }
 
         public double AnnualIncomeTax(double annualSalary)
         {
-            var incomeTax = 0.0;
-            for (var i = 0; i < _taxBrackets.Length; i++)
+            for (var i = 0; i < _taxBrackets.Count; i++)
             {
                 var lowerBound = i > 0 ? _taxBrackets[i - 1].CutOff : 0;
                 var upperBound = _taxBrackets[i].CutOff;
 
                 if (annualSalary <= upperBound)
                 {
-                    incomeTax = (annualSalary - lowerBound) * _taxBrackets[i].Rate + _taxBrackets[i].LumpTax;
-                    break;
+                    return (annualSalary - lowerBound) * _taxBrackets[i].Rate + _taxBrackets[i].LumpTax;
                 }
             }
-            return incomeTax;
+            throw new ArgumentOutOfRangeException(nameof(annualSalary), "Exceeds Top Tax Bracket");
         }
     }
 }

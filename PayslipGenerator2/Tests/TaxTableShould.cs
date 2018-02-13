@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using PayslipGenerator2.Structures;
 
 namespace PayslipGenerator2.Tests
@@ -24,6 +25,22 @@ namespace PayslipGenerator2.Tests
             var actualTax = table.AnnualIncomeTax(annualSalary);
 
             Assert.AreEqual(expectedTax, actualTax);
+        }
+
+        [Test]
+        public void ThrowOnOutOfRangeSalary()
+        {
+            var table = new TaxTable(new[]
+                {
+                    new TaxBracket(18200, 0, 0),
+                    new TaxBracket(37000, .19, 0),
+                    new TaxBracket(80000, .325, 3572),
+                    new TaxBracket(180000, .37, 17547)
+                }
+            );
+            const int annualSalary = 200000;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => table.AnnualIncomeTax(annualSalary));
         }
     }
 }
