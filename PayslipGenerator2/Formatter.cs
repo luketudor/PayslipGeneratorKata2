@@ -1,4 +1,6 @@
-﻿namespace PayslipGenerator2
+﻿using PayslipGenerator2.Structures;
+
+namespace PayslipGenerator2
 {
     public class Formatter
     {

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.CodeDom;
+using PayslipGenerator2.Structures;
 
 namespace PayslipGenerator2
 {
@@ -28,20 +30,45 @@ namespace PayslipGenerator2
                 return Convert.ToInt32(Math.Round(number));
             }
 
-            var name = $"{employee.FirstName} {employee.LastName}";
+            var name = Name(employee.FirstName, employee.LastName);
             var payPeriod = employee.PaymentStartDate;
-            var grossIncome = employee.AnnualSalary / _payslipsPerYear;
-            var incomeTax = _taxTable.AnnualIncomeTax(employee.AnnualSalary) / _payslipsPerYear;
-            var netIncome = grossIncome - incomeTax;
-            var super = grossIncome * employee.SuperRate;
+            var grossIncome = GrossIncome(employee.AnnualSalary);
+            var incomeTax = IncomeTax(employee.AnnualSalary);
+            var netIncome = NetIncome(grossIncome, incomeTax);
+            var super = Super(grossIncome, employee.SuperRate);
 
             return new Payslip(
                 name,
                 payPeriod,
-                grossIncome,
+                Round(grossIncome),
                 Round(incomeTax),
                 Round(netIncome),
                 Round(super));
+        }
+
+        internal string Name(string first, string last)
+        {
+            return $"{first} {last}";
+        }
+
+        internal double GrossIncome(double annualSalary)
+        {
+            return annualSalary / _payslipsPerYear;
+        }
+
+        internal double IncomeTax(double annualSalary)
+        {
+            return _taxTable.AnnualIncomeTax(annualSalary) / _payslipsPerYear;
+        }
+
+        internal double NetIncome(double grossIncome, double incomeTax)
+        {
+            return grossIncome - incomeTax;
+        }
+
+        internal double Super(double grossIncome, double superRate)
+        {
+            return grossIncome * superRate;
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿namespace PayslipGenerator2
+﻿using PayslipGenerator2.Structures;
+
+namespace PayslipGenerator2
 {
-    public class EmployeeDetailsParser
+    public class Parser
     {
         private readonly char _separator;
 
-        public EmployeeDetailsParser()
+        public Parser()
         {
             _separator = ',';
         }

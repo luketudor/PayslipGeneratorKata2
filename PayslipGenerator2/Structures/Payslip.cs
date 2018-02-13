@@ -1,4 +1,4 @@
-﻿namespace PayslipGenerator2
+﻿namespace PayslipGenerator2.Structures
 {
     public struct Payslip
     {

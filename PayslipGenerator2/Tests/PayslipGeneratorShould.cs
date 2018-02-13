@@ -10,9 +10,15 @@ namespace PayslipGenerator2.Tests
         [Test]
         public void PrintPayslip(string employeeDetails, string expectedPayslip)
         {
-            var generator = new PayslipGenerator();
+            var parser = new Parser();
+            var calculator = new Calculator();
+            var formatter = new Formatter();
 
-            Assert.AreEqual(expectedPayslip, generator.Process(employeeDetails));
+            var employee = parser.Parse(employeeDetails);
+            var payslip = calculator.MakePayslip(employee);
+            var actualPayslip = formatter.FormatPayslip(payslip);
+
+            Assert.AreEqual(expectedPayslip, actualPayslip);
         }
     }
 }

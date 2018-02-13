@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using PayslipGenerator2.Structures;
 
 namespace PayslipGenerator2.Tests
 {
