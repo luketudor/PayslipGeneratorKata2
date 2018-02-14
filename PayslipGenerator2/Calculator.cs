@@ -42,7 +42,7 @@ namespace PayslipGenerator2
 
         internal string Name(string first, string last)
         {
-            return $"{first} {last}";
+            return $@"{first} {last}";
         }
 
         internal double GrossIncome(double annualSalary)
