@@ -1,15 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PayslipGenerator2
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
-        {
+        public static void Main(string[] args)
+        { 
+            while (true)
+            {
+                var employeeDetails = Console.ReadLine();
+                var employee = new Parser().ParseEmployee(employeeDetails);
+                var payslip = new Calculator().MakePayslip(employee);
+                var formattedPayslip = new Formatter().FormatPayslip(payslip);
+                Console.WriteLine(formattedPayslip);
+            }
         }
     }
 }
