@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using PayslipGenerator2.Structures;
 
 namespace PayslipGenerator2
@@ -25,11 +24,6 @@ namespace PayslipGenerator2
 
         public Payslip MakePayslip(Employee employee)
         {
-            int Round(double number)
-            {
-                return Convert.ToInt32(Math.Round(number));
-            }
-
             var name = Name(employee.FirstName, employee.LastName);
             var payPeriod = employee.PaymentStartDate;
             var grossIncome = GrossIncome(employee.AnnualSalary);
@@ -40,10 +34,10 @@ namespace PayslipGenerator2
             return new Payslip(
                 name,
                 payPeriod,
-                Round(grossIncome),
-                Round(incomeTax),
-                Round(netIncome),
-                Round(super));
+                Convert.ToInt32(grossIncome),
+                Convert.ToInt32(incomeTax),
+                Convert.ToInt32(netIncome),
+                Convert.ToInt32(super));
         }
 
         internal string Name(string first, string last)
