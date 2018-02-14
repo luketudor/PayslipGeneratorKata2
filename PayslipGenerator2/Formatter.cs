@@ -1,4 +1,4 @@
-﻿using PayslipGenerator2.Structures;
+﻿using PayslipGenerator2.DTO;
 
 namespace PayslipGenerator2
 {

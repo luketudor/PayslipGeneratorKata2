@@ -1,6 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
-using PayslipGenerator2.Structures;
+using PayslipGenerator2.DTO;
 
 namespace PayslipGenerator2.Tests
 {
@@ -16,13 +16,13 @@ namespace PayslipGenerator2.Tests
         [Test]
         public void CalculateAnnualIncomeTax(double annualSalary, double expectedTax)
         {
-            var table = new TaxTable(new[]
+            var table = new TaxFinder(new[]
                 {
-                    new TaxBracket(0, 18200, 0, 0),
-                    new TaxBracket(18200, 37000, .19, 0),
-                    new TaxBracket(37000, 80000, .325, 3572),
-                    new TaxBracket(80000, 180000, .37, 17547),
-                    new TaxBracket(180000, int.MaxValue, .45, 54547) 
+                    new TaxBracket{LowerBound = 0, UpperBound = 18200, Rate = 0, LumpTax = 0},
+                    new TaxBracket{LowerBound = 18200, UpperBound = 37000, Rate = .19, LumpTax = 0},
+                    new TaxBracket{LowerBound = 37000, UpperBound = 80000, Rate = .325, LumpTax = 3572},
+                    new TaxBracket{LowerBound = 80000, UpperBound = 180000, Rate = .37, LumpTax = 17547},
+                    new TaxBracket{LowerBound = 180000, UpperBound = int.MaxValue, Rate = .45, LumpTax = 54547},
                 }
             );
             var actualTax = table.AnnualIncomeTax(annualSalary);
@@ -33,17 +33,35 @@ namespace PayslipGenerator2.Tests
         [Test]
         public void ThrowOnOutOfRangeSalary()
         {
-            var table = new TaxTable(new[]
+            var table = new TaxFinder(new[]
                 {
-                    new TaxBracket(0, 18200, 0, 0),
-                    new TaxBracket(18200, 37000, .19, 0),
-                    new TaxBracket(37000, 80000, .325, 3572),
-                    new TaxBracket(80000, 180000, .37, 17547)
+                    new TaxBracket{LowerBound = 0, UpperBound = 18200, Rate = 0, LumpTax = 0},
+                    new TaxBracket{LowerBound = 18200, UpperBound = 37000, Rate = .19, LumpTax = 0},
+                    new TaxBracket{LowerBound = 37000, UpperBound = 80000, Rate = .325, LumpTax = 3572},
+                    new TaxBracket{LowerBound = 80000, UpperBound = 180000, Rate = .37, LumpTax = 17547},
                 }
             );
             const int annualSalary = 200000;
 
             Assert.Catch<Exception>(() => table.AnnualIncomeTax(annualSalary));
+        }
+
+        [TestCase(60050, 11063.25)]
+        [Test]
+        public void CalculateTaxForUnorderedBrackets(double annualSalary, double expectedTax)
+        {
+            var table = new TaxFinder(new[]
+                {
+                    new TaxBracket{LowerBound = 37000, UpperBound = 80000, Rate = .325, LumpTax = 3572},
+                    new TaxBracket{LowerBound = 180000, UpperBound = int.MaxValue, Rate = .45, LumpTax = 54547},
+                    new TaxBracket{LowerBound = 18200, UpperBound = 37000, Rate = .19, LumpTax = 0},
+                    new TaxBracket{LowerBound = 80000, UpperBound = 180000, Rate = .37, LumpTax = 17547},
+                    new TaxBracket{LowerBound = 0, UpperBound = 18200, Rate = 0, LumpTax = 0},
+                }
+            );
+            var actualTax = table.AnnualIncomeTax(annualSalary);
+
+            Assert.AreEqual(expectedTax, actualTax);
         }
     }
 }

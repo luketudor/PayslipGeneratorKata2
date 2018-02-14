@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PayslipGenerator2.Structures;
+using PayslipGenerator2.DTO;
 
 namespace PayslipGenerator2
 {
-    public class TaxTable
+    public class TaxFinder
     {
-        private readonly IEnumerable<TaxBracket> _taxBrackets;
+        private readonly IOrderedEnumerable<TaxBracket> _taxBrackets;
 
-        public TaxTable(IEnumerable<TaxBracket> taxBrackets)
+        public TaxFinder(IEnumerable<TaxBracket> taxBrackets)
         {
-            _taxBrackets = taxBrackets;
+            _taxBrackets = taxBrackets.OrderBy(bracket => bracket.UpperBound);
         }
 
         public double AnnualIncomeTax(double annualSalary)

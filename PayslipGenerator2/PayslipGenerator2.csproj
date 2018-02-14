@@ -46,15 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Calculator.cs" />
-    <Compile Include="Structures\Employee.cs" />
+    <Compile Include="DTO\Employee.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Formatter.cs" />
-    <Compile Include="Structures\TaxBracket.cs" />
+    <Compile Include="DTO\TaxBracket.cs" />
     <Compile Include="Tests\FormatterShould.cs" />
-    <Compile Include="Structures\Payslip.cs" />
+    <Compile Include="DTO\Payslip.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaxTable.cs" />
+    <Compile Include="TaxFinder.cs" />
     <Compile Include="Tests\CalculatorShould.cs" />
     <Compile Include="Tests\ParserShould.cs" />
     <Compile Include="Tests\PayslipGeneratorShould.cs" />

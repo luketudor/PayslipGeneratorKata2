@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using PayslipGenerator2.Structures;
+using PayslipGenerator2.DTO;
 
 namespace PayslipGenerator2.Tests
 {
@@ -12,7 +12,14 @@ namespace PayslipGenerator2.Tests
             const string employeeDetails = "David,Rudd,60050,9%,01 March – 31 March";
             var parser = new Parser();
 
-            var expectedEmployee = new Employee("David", "Rudd", 60050, .09, "01 March – 31 March");
+            var expectedEmployee = new Employee
+            {
+                FirstName = "David",
+                LastName = "Rudd",
+                AnnualSalary = 60050,
+                SuperRate = .09,
+                PaymentStartDate = "01 March – 31 March"
+            };
 
             Assert.AreEqual(expectedEmployee, parser.ParseEmployee(employeeDetails));
         }
@@ -23,7 +30,14 @@ namespace PayslipGenerator2.Tests
             const string employeeDetails = "Ryan,Chen,120000,10%,01 March – 31 March";
             var parser = new Parser();
 
-            var expectedEmployee = new Employee("Ryan", "Chen", 120000, .1, "01 March – 31 March");
+            var expectedEmployee = new Employee
+            {
+                FirstName = "Ryan",
+                LastName = "Chen",
+                AnnualSalary = 120000,
+                SuperRate = .1,
+                PaymentStartDate = "01 March – 31 March"
+            };
 
             Assert.AreEqual(expectedEmployee, parser.ParseEmployee(employeeDetails));
         }
