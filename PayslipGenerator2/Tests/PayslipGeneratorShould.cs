@@ -14,7 +14,7 @@ namespace PayslipGenerator2.Tests
             var calculator = new Calculator();
             var formatter = new Formatter();
 
-            var employee = parser.Parse(employeeDetails);
+            var employee = parser.ParseEmployee(employeeDetails);
             var payslip = calculator.MakePayslip(employee);
             var actualPayslip = formatter.FormatPayslip(payslip);
 

@@ -11,7 +11,7 @@ namespace PayslipGenerator2
             _separator = ',';
         }
 
-        public Employee Parse(string employeeDetails)
+        public Employee ParseEmployee(string employeeDetails)
         {
             var fields = employeeDetails.Split(_separator);
 
