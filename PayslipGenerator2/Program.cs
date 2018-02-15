@@ -10,7 +10,7 @@ namespace PayslipGenerator2
             {
                 var employeeDetails = Console.ReadLine();
                 var employee = new Parser().ParseEmployee(employeeDetails);
-                var payslip = new Calculator().MakePayslip(employee);
+                var payslip = new Accountant().MakePayslip(employee);
                 var formattedPayslip = new Formatter().FormatPayslip(payslip);
                 Console.WriteLine(formattedPayslip);
             }

@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using PayslipGenerator2.DTO;
 
-namespace PayslipGenerator2
+namespace PayslipGenerator2.Test
 {
     [TestFixture]
     public class FormatterShould

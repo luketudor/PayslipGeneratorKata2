@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using PayslipGenerator2.DTO;
 
-namespace PayslipGenerator2.Tests
+namespace PayslipGenerator2.Test
 {
     [TestFixture]
-    public class CalculatorShould
+    public class AccountantShould
     {
         [Test]
         public void CalculateDavidPayslip()
@@ -28,7 +28,7 @@ namespace PayslipGenerator2.Tests
                 Super = 450
             };
 
-            var actualPayslip = new Calculator().MakePayslip(david);
+            var actualPayslip = new Accountant().MakePayslip(david);
 
             Assert.AreEqual(expectedPayslip, actualPayslip);
         }
@@ -55,7 +55,7 @@ namespace PayslipGenerator2.Tests
                 Super = 1000
             };
 
-            var actualPayslip = new Calculator().MakePayslip(ryan);
+            var actualPayslip = new Accountant().MakePayslip(ryan);
 
             Assert.AreEqual(expectedPayslip, actualPayslip);
         }
